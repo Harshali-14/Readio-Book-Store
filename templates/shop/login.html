@@ -1,0 +1,205 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+
+<style>
+body {
+    background: linear-gradient(135deg, #f8fafc, #eef2ff);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ===== GLASS CARD WITH ANIMATION ===== */
+.login-card {
+    margin-top: 70px;
+    border-radius: 20px;
+    backdrop-filter: blur(16px);
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+    animation: cardFade 0.8s ease forwards;
+}
+
+/* Card animation */
+@keyframes cardFade {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ===== TITLE ===== */
+.login-title {
+    font-weight: 600;
+    color: #1e293b;
+
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+    animation-delay: 0.2s;
+}
+
+/* ===== SUBTITLE ===== */
+.text-muted {
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+    animation-delay: 0.3s;
+}
+
+/* ===== INPUT ANIMATION ===== */
+.form-floating {
+    opacity: 0;
+    transform: translateY(15px);
+    animation: fadeUp 0.6s ease forwards;
+}
+
+.form-floating:nth-of-type(1) {
+    animation-delay: 0.4s;
+}
+
+.form-floating:nth-of-type(2) {
+    animation-delay: 0.5s;
+}
+
+/* ===== FADE UP ===== */
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== INPUTS ===== */
+.form-floating > .form-control {
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    transition: 0.3s;
+}
+
+.form-floating > .form-control:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+}
+
+/* ===== BUTTON ===== */
+.btn-login {
+    border-radius: 12px;
+    background: linear-gradient(135deg, #6366f1, #3b82f6);
+    border: none;
+    padding: 12px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+    animation-delay: 0.6s;
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(99,102,241,0.25);
+}
+
+/* Click effect */
+.btn-login:active {
+    transform: scale(0.97);
+}
+
+/* ===== TOGGLE PASSWORD ===== */
+.toggle-password {
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.2s;
+}
+
+.toggle-password:hover {
+    transform: scale(1.2);
+}
+
+/* ===== LINK ===== */
+a {
+    text-decoration: none;
+    color: #6366f1;
+    transition: 0.2s;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ===== ALERT ANIMATION ===== */
+.alert {
+    animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+</style>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+
+            <div class="card login-card p-4">
+
+                <div class="text-center mb-4">
+                    <h3 class="login-title">Welcome Back</h3>
+                    <p class="text-muted">Login to continue</p>
+                </div>
+
+                {% for message in messages %}
+                    <div class="alert alert-danger">{{ message }}</div>
+                {% endfor %}
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <!-- Username -->
+                    <div class="form-floating mb-3">
+                        <input type="text" name="username" class="form-control" placeholder="Username" required>
+                        <label>Username</label>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-floating mb-3 position-relative">
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+                        <label>Password</label>
+
+                        <span class="position-absolute top-50 end-0 translate-middle-y me-3 toggle-password"
+                              onclick="togglePassword()">👁️</span>
+                    </div>
+
+                    <!-- Remember -->
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox">
+                        <label class="form-check-label">Remember me</label>
+                    </div>
+
+                    <button class="btn btn-login w-100 text-white">Login</button>
+                </form>
+
+                <p class="text-center mt-3">
+                    Don’t have an account?
+                    <a href="/register/">Create account</a>
+                </p>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+function togglePassword() {
+    let pass = document.getElementById("password");
+    pass.type = (pass.type === "password") ? "text" : "password";
+}
+</script>
+
+{% endblock %}

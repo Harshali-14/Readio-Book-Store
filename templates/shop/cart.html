@@ -1,0 +1,73 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+
+<style>
+.cart-card {
+    border-radius: 12px;
+    transition: 0.3s;
+}
+.cart-card:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+.qty-btn {
+    padding: 2px 10px;
+    font-size: 14px;
+}
+</style>
+
+<div class="container mt-4">
+
+<h2 class="mb-4 text-center"> Your Cart</h2>
+
+{% if cart_items %}
+    {% for item in cart_items %}
+    <div class="card cart-card mb-3 p-3">
+
+        <div class="row align-items-center">
+
+            <!-- Image -->
+            <div class="col-md-2">
+                <img src="{{ item.book.image.url }}" class="img-fluid rounded">
+            </div>
+
+            <!-- Info -->
+            <div class="col-md-4">
+                <h5>{{ item.book.title }}</h5>
+                <p>₹{{ item.book.price }}</p>
+            </div>
+
+            <!-- Quantity -->
+            <div class="col-md-3">
+                <a href="{% url 'decrease_quantity' item.id %}" class="btn btn-outline-danger qty-btn">−</a>
+                <span class="mx-2">{{ item.quantity }}</span>
+                <a href="{% url 'increase_quantity' item.id %}" class="btn btn-outline-success qty-btn">+</a>
+            </div>
+
+            <!-- Total -->
+            <div class="col-md-2">
+                ₹{{ item.total_price }}
+            </div>
+
+            <!-- Remove -->
+            <div class="col-md-1">
+                <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-danger btn-sm">X</a>
+            </div>
+
+        </div>
+
+    </div>
+    {% endfor %}
+
+    <h3 class="text-end">Total: ₹{{ total }}</h3>
+
+    <div class="text-end">
+        <a href="{% url 'checkout' %}" class="btn btn-success">Proceed to Checkout</a>
+    </div>
+
+{% else %}
+    <p class="text-center">Your cart is empty 😢</p>
+{% endif %}
+
+</div>
+
+{% endblock %}

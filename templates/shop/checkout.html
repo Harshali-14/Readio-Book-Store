@@ -1,0 +1,154 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+
+<style>
+
+/* ===== PAGE ===== */
+.checkout-container {
+    max-width: 800px;
+    margin: auto;
+}
+
+/* ===== TITLE ===== */
+.checkout-title {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+/* ===== CARD ===== */
+.checkout-card {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.checkout-card:hover {
+    transform: translateY(-3px);
+}
+
+/* ===== ITEMS ===== */
+.item-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dashed #ddd;
+}
+
+/* ===== TOTAL ===== */
+.total-box {
+    text-align: right;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* ===== BUTTON ===== */
+.pay-btn {
+    background: linear-gradient(45deg, #28a745, #20c997);
+    border: none;
+    color: white;
+    font-weight: 600;
+    border-radius: 12px;
+    padding: 14px;
+    transition: 0.3s;
+    box-shadow: 0 8px 20px rgba(40,167,69,0.3);
+}
+
+.pay-btn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 25px rgba(40,167,69,0.5);
+}
+
+.pay-btn:active {
+    transform: scale(0.98);
+}
+
+/* ===== ICON ===== */
+.icon {
+    margin-right: 8px;
+}
+
+</style>
+
+<div class="container checkout-container">
+
+    <h2 class="checkout-title"> Secure Checkout</h2>
+
+    <!-- ORDER SUMMARY -->
+    <div class="checkout-card mb-4">
+
+        <h5 class="mb-3"> Order Summary</h5>
+
+        {% for item in cart_items %}
+        <div class="item-row">
+            <span>{{ item.book.title }}</span>
+            <span>₹{{ item.book.price }}</span>
+        </div>
+        {% endfor %}
+
+        <hr>
+
+        <div class="total-box">
+            Total: ₹{{ total_price }}
+        </div>
+
+    </div>
+
+    <!-- PAYMENT CARD -->
+    <div class="checkout-card text-center">
+
+        <h5 class="mb-3"> Payment</h5>
+
+        <p class="text-muted mb-4">
+            You will be securely redirected to Razorpay
+        </p>
+
+        <button id="rzp-button" class="pay-btn w-100">
+             Pay with Razorpay
+        </button>
+
+    </div>
+
+</div>
+
+<!-- RAZORPAY -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+var options = {
+    "key": "{{ RAZORPAY_KEY_ID }}",
+    "amount": "{{ payment.amount }}",
+    "currency": "INR",
+    "name": "Readio Book Store",
+    "description": "Book Purchase Payment",
+    "order_id": "{{ payment.id }}",
+
+    "handler": function (response) {
+        window.location.href = "/payment-success/?payment_id=" 
+            + response.razorpay_payment_id 
+            + "&order_id=" 
+            + response.razorpay_order_id;
+    },
+
+    "prefill": {
+        "name": "{{ user.username }}",
+        "email": "{{ user.email }}"
+    },
+
+    "theme": {
+        "color": "#28a745"
+    }
+};
+
+var rzp1 = new Razorpay(options);
+
+document.getElementById('rzp-button').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+</script>
+
+{% endblock %}

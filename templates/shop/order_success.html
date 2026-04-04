@@ -1,0 +1,181 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+
+<style>
+body {
+    background: linear-gradient(135deg, #eef2f7, #dfe9f3);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Wrapper */
+.success-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 85vh;
+    padding: 20px;
+}
+
+/* Card (Glassmorphism Style) */
+.success-card {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+/* Success Icon */
+.success-icon {
+    width: 90px;
+    height: 90px;
+    margin: auto;
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    font-size: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 15px 30px rgba(40,167,69,0.4);
+    animation: pop 0.5s ease;
+}
+
+/* Pop animation */
+@keyframes pop {
+    0% {transform: scale(0.5);}
+    100% {transform: scale(1);}
+}
+
+/* Title */
+.success-title {
+    margin-top: 20px;
+    font-size: 26px;
+    font-weight: 700;
+    color: #28a745;
+}
+
+/* Text */
+.success-text {
+    font-size: 15px;
+    color: #555;
+    margin-top: 10px;
+}
+
+/* Order Box */
+.order-box {
+    text-align: left;
+    background: #f8f9fb;
+    padding: 18px;
+    border-radius: 14px;
+    margin-top: 25px;
+    font-size: 14px;
+    border: 1px solid #eee;
+}
+
+/* Divider */
+hr {
+    margin: 25px 0;
+    border: none;
+    height: 1px;
+    background: #eee;
+}
+
+/* Buttons */
+.btn-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-custom {
+    padding: 12px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+/* Primary */
+.btn-home {
+    background: #111;
+    color: white;
+}
+
+.btn-home:hover {
+    background: #333;
+    transform: translateY(-2px);
+}
+
+/* Secondary */
+.btn-invoice {
+    background: #28a745;
+    color: white;
+}
+
+.btn-invoice:hover {
+    background: #1e7e34;
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+    .success-card {
+        padding: 25px;
+    }
+}
+</style>
+
+<div class="success-wrapper">
+
+    <div class="success-card">
+
+        <!-- Icon -->
+        <div class="success-icon">✓</div>
+
+        <!-- Title -->
+        <div class="success-title">Order Confirmed!</div>
+
+        <!-- Message -->
+        <div class="success-text">
+            Your order has been placed successfully. You’ll receive a confirmation soon.
+        </div>
+
+        <hr>
+
+        <!-- Order Details -->
+        <div class="order-box">
+            <p><b>📦 Order ID:</b> {{ order.id }}</p>
+            <p><b>💰 Total:</b> ₹{{ order.total_amount }}</p>
+            <p><b>📅 Date:</b> {{ order.created_at }}</p>
+        </div>
+
+        <hr>
+
+        <!-- Buttons -->
+        <div class="btn-group">
+            <a href="/" class="btn-custom btn-home">🏠 Continue Shopping</a>
+
+            <a href="{% url 'invoice' order.id %}" class="btn-custom btn-invoice">
+                📄 Download Invoice
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

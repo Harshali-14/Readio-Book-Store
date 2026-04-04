@@ -1,0 +1,217 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+
+<style>
+
+body {
+    background: #f7f9fc;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ===== HERO ===== */
+.hero {
+    background: linear-gradient(135deg, #303030, #626264);
+    padding: 60px 30px;
+    border-radius: 20px;
+    text-align: center;
+    margin-bottom: 25px;
+    color: white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.hero h1 {
+    font-weight: 700;
+}
+
+/* ===== SEARCH ===== */
+.search-box {
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+}
+
+/* ===== CATEGORY BAR ===== */
+.category-bar {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    margin-bottom: 25px;
+}
+
+.category-bar a {
+    white-space: nowrap;
+    padding: 8px 15px;
+    background: white;
+    border-radius: 20px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    transition: 0.3s;
+}
+
+.category-bar a:hover {
+    background: #4e54c8;
+    color: white;
+}
+
+/* ===== SECTION ===== */
+.section {
+    margin-bottom: 40px;
+}
+
+.section h4 {
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+/* ===== HORIZONTAL SCROLL ===== */
+.book-row {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+/* ===== CARD ===== */
+.book-card {
+    min-width: 250px;
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.10);
+    transition: 0.3s;
+}
+
+.book-card:hover {
+    transform: translateY(-6px);
+}
+
+/* ===== IMAGE ===== */
+.book-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+/* ===== OVERLAY ===== */
+.overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 0;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    flex-direction: column;
+}
+
+.book-card:hover .overlay {
+    height: 100%;
+}
+
+/* ===== CARD BODY ===== */
+.card-body {
+    padding: 12px;
+    text-align: center;
+}
+
+.book-title {
+    font-size: 15px;
+    font-weight: 600;
+    height: 40px;
+    overflow: hidden;
+}
+
+.price {
+    color: #28a745;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+/* ===== BUTTON ===== */
+.btn-custom {
+    font-size: 13px;
+    padding: 6px 12px;
+    margin-top: 8px;
+    border-radius: 8px;
+}
+
+</style>
+
+<div class="container mt-4">
+
+    <!-- HERO -->
+    <div class="hero">
+        <h1> Readio</h1>
+        <p>Explore books like never before ✨</p>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="search-box">
+        <form method="GET" class="row g-2">
+            <div class="col-md-8">
+                <input type="text" name="q" class="form-control" placeholder="🔍 Search books...">
+            </div>
+
+            <div class="col-md-2">
+                <select name="category" class="form-select">
+                    <option value="">All</option>
+                    {% for cat in categories %}
+                        <option value="{{ cat.name }}">{{ cat.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <button class="btn btn-dark w-100">Search</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- CATEGORY BAR -->
+    <div class="category-bar">
+        <a href="/">All</a>
+        {% for cat in categories %}
+            <a href="?category={{ cat.name }}">{{ cat.name }}</a>
+        {% endfor %}
+    </div>
+
+    <!-- SECTION -->
+    <div class="section">
+        <h4>Trending Books</h4>
+
+        <div class="book-row">
+
+            {% for book in books %}
+            <div class="book-card">
+
+                <img src="{{ book.image.url }}">
+
+                <!-- Overlay -->
+                <div class="overlay">
+                    <a href="{% url 'book_detail' book.id %}" class="btn btn-light btn-custom">
+                        View Details
+                    </a>
+                </div>
+
+                <div class="card-body">
+                    <div class="book-title">{{ book.title }}</div>
+                    <div class="price">₹{{ book.price }}</div>
+                </div>
+
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

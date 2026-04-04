@@ -1,0 +1,154 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+
+<style>
+
+body {
+    background: linear-gradient(135deg, #eef2f7, #e3edf7);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ===== TITLE ===== */
+.page-title {
+    text-align: center;
+    font-weight: 700;
+    margin: 30px 0;
+}
+
+/* ===== CARD ===== */
+.track-card {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+}
+
+/* ===== TIMELINE ===== */
+.timeline {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    position: relative;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #ddd;
+    z-index: 0;
+}
+
+.step {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    width: 25%;
+}
+
+/* ===== DOT ===== */
+.dot {
+    width: 30px;
+    height: 30px;
+    background: #ddd;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    line-height: 30px;
+    color: white;
+    font-size: 14px;
+}
+
+/* ACTIVE STEP */
+.step.active .dot {
+    background: linear-gradient(45deg, #28a745, #20c997);
+}
+
+/* COMPLETED STEP */
+.step.completed .dot {
+    background: #28a745;
+}
+
+/* ===== TEXT ===== */
+.step p {
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+/* ===== INFO ===== */
+.info-box {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 12px;
+    margin-top: 20px;
+}
+
+</style>
+
+<div class="container">
+
+    <h2 class="page-title"> Tracking Order</h2>
+
+    <div class="track-card">
+
+        <h4 class="fw-bold">Order #{{ order.id }}</h4>
+
+        <p><b>Status:</b> {{ order.status }}</p>
+        <p><b>Total:</b> ₹{{ order.total_amount }}</p>
+
+        <div class="info-box">
+            <small>📅 Placed on: {{ order.created_at|date:"d M Y" }}</small>
+        </div>
+
+        <!-- TIMELINE -->
+        <!-- TIMELINE -->
+<div class="timeline">
+
+    <!-- ORDERED -->
+    <div class="step {% if order.status in 'Ordered Shipped Out for Delivery Delivered' %}completed{% endif %}">
+        <div class="dot">✔</div>
+        <p>Ordered</p>
+    </div>
+
+    <!-- SHIPPED -->
+    <div class="step {% if order.status in 'Shipped Out for Delivery Delivered' %}completed{% endif %}">
+        <div class="dot">🚚</div>
+        <p>Shipped</p>
+    </div>
+
+    <!-- OUT FOR DELIVERY -->
+    <div class="step {% if order.status in 'Out for Delivery Delivered' %}completed{% endif %}">
+        <div class="dot">📦</div>
+        <p>Out for Delivery</p>
+    </div>
+
+    <!-- DELIVERED -->
+    <div class="step {% if order.status == 'Delivered' %}completed{% endif %}">
+        <div class="dot">🏠</div>
+        <p>Delivered</p>
+    </div>
+
+</div>
+
+        <!-- STATUS MESSAGE -->
+        <div class="mt-4 text-center">
+
+            {% if order.status == 'Ordered' %}
+                <p class="text-warning fw-bold">⏳ Your order is being processed</p>
+            {% elif order.status == 'Shipped' %}
+                <p class="text-info fw-bold">🚚 Your order is on the way</p>
+            {% elif order.status == 'Delivered' %}
+                <p class="text-success fw-bold">✅ Delivered successfully</p>
+            {% else %}
+                <p class="text-muted">Status: {{ order.status }}</p>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
