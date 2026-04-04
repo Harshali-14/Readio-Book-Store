@@ -35,17 +35,14 @@ Readio is designed to simulate a real-world e-commerce bookstore platform with s
 ### Register Page
 ![Register](static/screenshots/register.png)
 
-### Checkout
-![Checkout](static/screenshots/checkout.png)
-
 ### Cart
 ![Cart](static/screenshots/cart.png)
 
-### Order Tracking
-![Order Tracking](static/screenshots/order_tracking.png)
+### Checkout
+![Checkout](static/screenshots/checkout.png)
 
-### Orders
-![Orders](static/screenshots/orders.png)
+### Razorpay Integration
+![Razorpay](static/screenshots/razorpay.png)
 
 ### Payment Processing
 ![Payment Processing](static/screenshots/payment_processing.png)
@@ -53,11 +50,14 @@ Readio is designed to simulate a real-world e-commerce bookstore platform with s
 ### Payment Success
 ![Payment Success](static/screenshots/payment_success.png)
 
+### Order Tracking
+![Order Tracking](static/screenshots/order_tracking.png)
+
+### Orders
+![Orders](static/screenshots/orders.png)
+
 ### Profile
 ![Profile](static/screenshots/profile.png)
-
-### Razorpay Integration
-![Razorpay](static/screenshots/razorpay.png)
 
 ### Wishlist
 ![Wishlist](static/screenshots/wishlist.png)
