@@ -24,6 +24,43 @@ Readio is designed to simulate a real-world e-commerce bookstore platform with s
 - Responsive and modern UI  
 
 ---
+## Screenshots
+
+### Bookstore
+![Bookstore](static/screenshots/bookstore.png)
+
+### Login Page
+![Login](static/screenshots/login.png)
+
+### Register Page
+![Register](static/screenshots/register.png)
+
+### Checkout
+![Checkout](static/screenshots/checkout.png)
+
+### Cart
+![Cart](static/screenshots/cart.png)
+
+### Order Tracking
+![Order Tracking](static/screenshots/order_tracking.png)
+
+### Orders
+![Orders](static/screenshots/orders.png)
+
+### Payment Processing
+![Payment Processing](static/screenshots/payment_processing.png)
+
+### Payment Success
+![Payment Success](static/screenshots/payment_success.png)
+
+### Profile
+![Profile](static/screenshots/profile.png)
+
+### Razorpay Integration
+![Razorpay](static/screenshots/razorpay.png)
+
+### Wishlist
+![Wishlist](static/screenshots/wishlist.png)
 
 ## Technology Stack
 
