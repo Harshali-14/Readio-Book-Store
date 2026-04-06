@@ -2,13 +2,12 @@
 {% block content %}
 
 <style>
-
 body {
     background: #f7f9fc;
     font-family: 'Poppins', sans-serif;
 }
 
-/* ===== HERO ===== */
+/* HERO */
 .hero {
     background: linear-gradient(135deg, #303030, #626264);
     padding: 60px 30px;
@@ -16,23 +15,17 @@ body {
     text-align: center;
     margin-bottom: 25px;
     color: white;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
-.hero h1 {
-    font-weight: 700;
-}
-
-/* ===== SEARCH ===== */
+/* SEARCH */
 .search-box {
     background: white;
     padding: 15px;
     border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
     margin-bottom: 20px;
 }
 
-/* ===== CATEGORY BAR ===== */
+/* CATEGORY */
 .category-bar {
     display: flex;
     gap: 10px;
@@ -41,115 +34,164 @@ body {
 }
 
 .category-bar a {
-    white-space: nowrap;
     padding: 8px 15px;
     background: white;
     border-radius: 20px;
     text-decoration: none;
     color: #333;
-    font-size: 14px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-    transition: 0.3s;
 }
 
-.category-bar a:hover {
-    background: #4e54c8;
-    color: white;
-}
-
-/* ===== SECTION ===== */
-.section {
-    margin-bottom: 40px;
-}
-
-.section h4 {
-    font-weight: 600;
-    margin-bottom: 15px;
-}
-
-/* ===== HORIZONTAL SCROLL ===== */
+/* BOOK ROW */
 .book-row {
     display: flex;
     gap: 20px;
     overflow-x: auto;
-    padding-bottom: 10px;
 }
 
-/* ===== CARD ===== */
+/* BOOK CARD */
 .book-card {
-    min-width: 250px;
-    background: white;
-    border-radius: 18px;
-    overflow: hidden;
+    min-width: 220px;
+}
+
+.book-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* IMAGE */
+.book-img-wrapper {
     position: relative;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.10);
-    transition: 0.3s;
+    overflow: hidden;
+    border-radius: 15px;
 }
 
-.book-card:hover {
-    transform: translateY(-6px);
-}
-
-/* ===== IMAGE ===== */
-.book-card img {
+.book-img-wrapper img {
     width: 100%;
     height: 300px;
     object-fit: cover;
+    transition: transform 0.3s;
 }
 
-/* ===== OVERLAY ===== */
+.book-img-wrapper:hover img {
+    transform: scale(1.1);
+}
+
+/* OVERLAY */
 .overlay {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 0;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.75);
     color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 10px;
+    opacity: 0;
     transition: 0.3s;
-    flex-direction: column;
-}
-
-.book-card:hover .overlay {
-    height: 100%;
-}
-
-/* ===== CARD BODY ===== */
-.card-body {
-    padding: 12px;
     text-align: center;
 }
 
-.book-title {
-    font-size: 15px;
-    font-weight: 600;
-    height: 40px;
+.book-img-wrapper:hover .overlay {
+    opacity: 1;
+}
+
+/* CHAT BUTTON */
+#chatbot-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #4e54c8, #6a11cb);
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* CHATBOX */
+#chatbox {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 340px;
+    height: 480px;
+    background: white;
+    display: none;
+    flex-direction: column;
+    border-radius: 18px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
     overflow: hidden;
 }
 
-.price {
-    color: #28a745;
-    font-weight: bold;
-    margin-top: 5px;
+/* HEADER */
+.chat-header {
+    background: linear-gradient(135deg, #4e54c8, #6a11cb);
+    color: white;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
 }
 
-/* ===== BUTTON ===== */
-.btn-custom {
-    font-size: 13px;
-    padding: 6px 12px;
-    margin-top: 8px;
-    border-radius: 8px;
+/* BODY */
+#chat-body {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background: #f7f9fc;
 }
 
+/* MESSAGE */
+.msg {
+    margin: 6px 0;
+    padding: 10px;
+    border-radius: 14px;
+    max-width: 80%;
+}
+
+/* USER */
+.user {
+    background: #4e54c8;
+    color: white;
+    margin-left: auto;
+}
+
+/* BOT */
+.bot {
+    background: #e9ecef;
+    margin-right: auto;
+}
+
+/* INPUT */
+.chat-input {
+    display: flex;
+    padding: 10px;
+    background: white;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+}
+
+.chat-input button {
+    margin-left: 8px;
+    background: #4e54c8;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 50%;
+}
 </style>
 
 <div class="container mt-4">
 
     <!-- HERO -->
     <div class="hero">
-        <h1> Readio</h1>
+        <h1>📚 Readio</h1>
         <p>Explore books like never before ✨</p>
     </div>
 
@@ -159,7 +201,6 @@ body {
             <div class="col-md-8">
                 <input type="text" name="q" class="form-control" placeholder="🔍 Search books...">
             </div>
-
             <div class="col-md-2">
                 <select name="category" class="form-select">
                     <option value="">All</option>
@@ -168,14 +209,13 @@ body {
                     {% endfor %}
                 </select>
             </div>
-
             <div class="col-md-2">
                 <button class="btn btn-dark w-100">Search</button>
             </div>
         </form>
     </div>
 
-    <!-- CATEGORY BAR -->
+    <!-- CATEGORY -->
     <div class="category-bar">
         <a href="/">All</a>
         {% for cat in categories %}
@@ -183,35 +223,98 @@ body {
         {% endfor %}
     </div>
 
-    <!-- SECTION -->
-    <div class="section">
-        <h4>Trending Books</h4>
+    <!-- BOOKS -->
+    <div class="book-row">
+        {% for book in books %}
+        <div class="book-card">
+            <a href="{% url 'book_detail' book.id %}" class="book-link">
 
-        <div class="book-row">
-
-            {% for book in books %}
-            <div class="book-card">
-
-                <img src="{{ book.image.url }}">
-
-                <!-- Overlay -->
-                <div class="overlay">
-                    <a href="{% url 'book_detail' book.id %}" class="btn btn-light btn-custom">
-                        View Details
-                    </a>
+                <div class="book-img-wrapper">
+                    <img src="{{ book.image.url }}">
+                    <div class="overlay">
+                        <h6>{{ book.title }}</h6>
+                        <p>₹{{ book.price }}</p>
+                    </div>
                 </div>
 
-                <div class="card-body">
-                    <div class="book-title">{{ book.title }}</div>
-                    <div class="price">₹{{ book.price }}</div>
-                </div>
-
-            </div>
-            {% endfor %}
-
+            </a>
         </div>
+        {% endfor %}
     </div>
 
 </div>
+
+<!-- CHAT BUTTON -->
+<div id="chatbot-btn" onclick="toggleChat()">💬</div>
+
+<!-- CHATBOX -->
+<div id="chatbox">
+    <div class="chat-header">
+        🤖 Readio AI
+        <span onclick="toggleChat()">✖</span>
+    </div>
+
+    <div id="chat-body"></div>
+
+    <div class="chat-input">
+        <input type="text" id="user-input" placeholder="Ask something...">
+        <button onclick="sendMessage()">➤</button>
+    </div>
+</div>
+
+<script>
+function toggleChat() {
+    let chatbox = document.getElementById("chatbox");
+    chatbox.style.display = chatbox.style.display === "flex" ? "none" : "flex";
+
+    if (chatbox.style.display === "flex" && document.getElementById("chat-body").innerHTML === "") {
+        addMessage("bot", "👋 Hi! Ask me: Python, AI, Web, Business...");
+    }
+}
+
+function addMessage(type, text) {
+    let chatBody = document.getElementById("chat-body");
+
+    let msg = document.createElement("div");
+    msg.classList.add("msg", type);
+    msg.innerText = text;
+
+    chatBody.appendChild(msg);
+    chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+function sendMessage() {
+    let input = document.getElementById("user-input");
+    let message = input.value;
+
+    if (!message) return;
+
+    addMessage("user", message);
+    input.value = "";
+
+    fetch("/chatbot/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": getCookie("csrftoken")
+        },
+        body: JSON.stringify({ message: message })
+    })
+    .then(res => res.json())
+    .then(data => {
+        addMessage("bot", data.reply);
+    });
+}
+
+function getCookie(name) {
+    let value = null;
+    document.cookie.split(';').forEach(c => {
+        if (c.trim().startsWith(name + '=')) {
+            value = decodeURIComponent(c.split('=')[1]);
+        }
+    });
+    return value;
+}
+</script>
 
 {% endblock %}

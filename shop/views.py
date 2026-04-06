@@ -19,6 +19,12 @@ from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 import hmac
 import hashlib
+from django.contrib.auth.decorators import login_required
+import json
+from django.http import JsonResponse
+from nltk.tokenize import word_tokenize
+import random
+from .logic import get_recommendation
 
 def verify_payment(order_id, payment_id, signature):
     generated_signature = hmac.new(
@@ -75,6 +81,7 @@ def login_view(request):
 
 
 # 🔓 Logout
+
 def logout_view(request):
     logout(request)
     return redirect('login')
@@ -99,7 +106,76 @@ def home(request):
         'categories': categories
     })
 
+@login_required
+@csrf_exempt
+def chatbot(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        message = data.get("message", "").lower()
+
+        words = word_tokenize(message)
+
+        books = Book.objects.all()
+
+        # 🎯 SMART RECOMMENDATION
+        if any(word in ["recommend", "suggest", "books"] for word in words):
+
+            # Category filter
+            for cat in Category.objects.all():
+                if cat.name.lower() in message:
+                    books = books.filter(category=cat)
+
+            # Keyword filter
+            if "python" in words:
+                books = books.filter(title__icontains="python")
+            elif "django" in words:
+                books = books.filter(title__icontains="django")
+            elif "web" in words:
+                books = books.filter(title__icontains="web")
+
+            books = books[:5]
+
+            if books.exists():
+                reply = "📚 Recommended Books:\n"
+                for b in books:
+                    reply += f"- {b.title} (₹{b.price})\n"
+            else:
+                reply = random.choice([
+                    "🤔 Try different keywords.",
+                    "📖 Try 'recommend python books'.",
+                    "🔍 No matching books found."
+                ])
+
+        # 👋 Greetings
+        elif any(word in ["hello", "hi", "hey"] for word in words):
+            reply = "👋 Hello! I can suggest books for you."
+
+        # 📦 Orders
+        elif "order" in words:
+            reply = "📦 Go to 'My Orders' to track your orders."
+
+        # ❓ Default
+        else:
+            reply = random.choice([
+                "🤖 Try: 'Recommend Python books'",
+                "📚 Ask me for book suggestions!",
+                "🔍 I can help you find books."
+            ])
+
+        return JsonResponse({"reply": reply})
+    
+@csrf_exempt
+def chatbot_view(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        message = data.get("message")
+
+        reply = get_recommendation(message)
+
+        return JsonResponse({"reply": reply})    
+
 # 📖 Book Detail
+@login_required
 def book_detail(request, id):
     book = get_object_or_404(Book, id=id)
 
@@ -261,6 +337,20 @@ def order_history(request):
 def track_order(request, id):
     order = get_object_or_404(Order, id=id)
     return render(request, 'shop/track_order.html', {'order': order})
+
+def cancel_order(request, id):
+    order = get_object_or_404(Order, id=id, user=request.user)
+
+    if request.method == 'POST':
+        if order.status in ['Pending', 'Shipped']:
+            order.status = 'Cancelled'
+            order.save()
+            messages.success(request, "Order cancelled successfully!")
+        else:
+            messages.error(request, "Order cannot be cancelled at this stage.")
+
+    return redirect('order_history')
+
 @csrf_exempt
 def payment_success(request):
     user = request.user
