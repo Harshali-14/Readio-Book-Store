@@ -1,20 +1,42 @@
 from django.contrib import admin
-from .models import Book, Category, Cart, Order, OrderItem
+from .models import Book, Category, Cart, Order, OrderItem, Wishlist, Rating
 
-# Basic registrations
-admin.site.register(Book)
-admin.site.register(Category)
-admin.site.register(Cart)
+# 📚 Book Admin
+@admin.register(Book)
+class BookAdmin(admin.ModelAdmin):
+    list_display = ['title', 'author', 'price', 'category']
+    search_fields = ['title', 'author']
+    list_filter = ['category']
 
-# Inline for Order Items
+# 📂 Category Admin
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ['name']
+
+# 🛒 Cart Admin
+@admin.register(Cart)
+class CartAdmin(admin.ModelAdmin):
+    list_display = ['user', 'book', 'quantity']
+
+# 📦 Inline Order Items
 class OrderItemInline(admin.TabularInline):
     model = OrderItem
     extra = 0
 
-# Order Admin
+# 📦 Order Admin (UPGRADED)
+@admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['id', 'user', 'total_amount', 'status', 'created_at']
+    list_display = ['id', 'user', 'total_amount', 'paid', 'status', 'created_at']
+    list_filter = ['status', 'paid', 'created_at']
+    search_fields = ['user__username', 'payment_id']
     inlines = [OrderItemInline]
 
-# Register models
-admin.site.register(Order, OrderAdmin)
+# ❤️ Wishlist
+@admin.register(Wishlist)
+class WishlistAdmin(admin.ModelAdmin):
+    list_display = ['user', 'book']
+
+# ⭐ Rating
+@admin.register(Rating)
+class RatingAdmin(admin.ModelAdmin):
+    list_display = ['user', 'book', 'rating']
