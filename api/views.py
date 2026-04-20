@@ -1,8 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from .models import *
-from api.serializers import *
-
+from .serializers import *
 
 # ---------------- CATEGORY ----------------
 class CategoryViewSet(viewsets.ModelViewSet):

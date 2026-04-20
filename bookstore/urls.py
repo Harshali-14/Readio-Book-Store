@@ -25,8 +25,9 @@ from rest_framework_simplejwt.views import (
 )
 
 urlpatterns = [
-     path('admin/', admin.site.urls),
-     path('', include('shop.urls')),
+    path('admin/', admin.site.urls),
+
+    # 👉 FRONTEND (shop views)
     path('', views.home, name='home'),
     path('login/', views.login_view, name='login'),
     path('register/', views.register_view, name='register'),
@@ -42,31 +43,33 @@ urlpatterns = [
     path('decrease/<int:id>/', views.decrease_quantity, name='decrease_quantity'),
 
     path('checkout/', views.checkout, name='checkout'),
+
     path('wishlist/', views.wishlist, name='wishlist'),
     path('wishlist/add/<int:id>/', views.add_to_wishlist, name='add_to_wishlist'),
     path('wishlist/remove/<int:id>/', views.remove_from_wishlist, name='remove_from_wishlist'),
+
     path('orders/', views.order_history, name='order_history'),
     path('track-order/<int:id>/', views.track_order, name='track_order'),
-path('payment-success/', views.payment_success, name='payment_success'),
-path('order-success/<int:order_id>/', views.order_success, name='order_success'),
-path('invoice/<int:order_id>/', views.invoice, name='invoice'),
-    path('profile/', views.profile, name='profile'),
-    
-path('edit-profile/', views.edit_profile, name='edit_profile'),
-path('change-password/', views.change_password, name='change_password'),
-path('cancel-order/<int:id>/', views.cancel_order, name='cancel_order'),
-path('chatbot/', views.chatbot, name='chatbot'),
 
- # JWT APIs
+    path('payment-success/', views.payment_success, name='payment_success'),
+    path('order-success/<int:order_id>/', views.order_success, name='order_success'),
+    path('invoice/<int:order_id>/', views.invoice, name='invoice'),
+
+    path('profile/', views.profile, name='profile'),
+    path('edit-profile/', views.edit_profile, name='edit_profile'),
+    path('change-password/', views.change_password, name='change_password'),
+    path('cancel-order/<int:id>/', views.cancel_order, name='cancel_order'),
+    path('chatbot/', views.chatbot, name='chatbot'),
+
+    # 👉 JWT
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
-    path('api/', include('api.urls')),   # REST APIs
-        # normal website
-    path('api/token/', TokenObtainPairView.as_view()),
-    path('api/token/refresh/', TokenRefreshView.as_view()),
-        path('api-auth/', include('rest_framework.urls')),
+    # 👉 DRF APIs
+    path('api/', include('api.urls')),
 
-] 
+    # 👉 DRF login UI
+    path('api-auth/', include('rest_framework.urls')),
+]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
