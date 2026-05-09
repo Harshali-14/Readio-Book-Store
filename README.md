@@ -112,7 +112,7 @@ Readio-Book-Store/
 ```bash
 git clone https://github.com/Harshali-14/Readio-Book-Store.git
 
-cd Readio-Book-Store
+cd bookstore
 ```
 
 ---
