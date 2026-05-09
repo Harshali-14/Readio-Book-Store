@@ -3,6 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 from .models import *
 from .serializers import *
 
+
 # ---------------- CATEGORY ----------------
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()

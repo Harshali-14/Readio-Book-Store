@@ -1,218 +1,240 @@
-# Readio — Online Bookstore
+# 📚 Readio — Online Bookstore
 
-Readio is a web-based online bookstore application built using Django.  
-It provides a complete system for browsing books, managing a cart, and processing secure payments through Razorpay.
-
----
-
-## Project Overview
-
-Readio is designed to simulate a real-world e-commerce bookstore platform with secure authentication, payment processing, and a user-friendly interface.
+Readio is a web-based online bookstore application developed using Django.  
+It provides a complete e-commerce platform where users can browse books, manage carts, place orders, and make secure online payments using Razorpay.
 
 ---
 
-## Features
+# 🚀 Features
 
-- User registration, login, and logout  
-- Browse and view books  
-- Detailed book pages  
-- Add and remove books from cart  
-- Cart total calculation  
-- Razorpay payment integration  
-- Secure payment verification  
-- User order history  
-- Responsive and modern UI  
-
----
-## Screenshots
-
-### Bookstore
-![Bookstore](static/screenshots/bookstore.png)
-
-### Login Page
-![Login](static/screenshots/login.png)
-
-### Register Page
-![Register](static/screenshots/register.png)
-
-### Cart
-![Cart](static/screenshots/cart.png)
-
-### Checkout
-![Checkout](static/screenshots/checkout.png)
-
-### Razorpay Integration
-![Razorpay](static/screenshots/razorpay.png)
-
-### Payment Processing
-![Payment Processing](static/screenshots/payment_processing.png)
-
-### Payment Success
-![Payment Success](static/screenshots/payment_success.png)
-
-### Order Tracking
-![Order Tracking](static/screenshots/order_tracking.png)
-
-### Orders
-![Orders](static/screenshots/orders.png)
-
-### Profile
-![Profile](static/screenshots/profile.png)
-
-### Wishlist
-![Wishlist](static/screenshots/wishlist.png)
-
-## Technology Stack
-
-- Backend: Django (Python)  
-- Frontend: HTML, CSS, Bootstrap  
-- Database: SQLite  
-- Payment Gateway: Razorpay  
-- Authentication: Django built-in authentication  
+- User Registration & Login
+- Secure Authentication System
+- Browse Available Books
+- Book Detail Pages
+- Add to Cart / Remove from Cart
+- Cart Total Calculation
+- Razorpay Payment Gateway Integration
+- Secure Payment Verification
+- Order History Management
+- Wishlist Feature
+- Responsive UI Design
+- Admin Panel for Management
 
 ---
 
-## Project Structure
+# 🛠️ Technology Stack
 
+| Technology | Description |
+|------------|-------------|
+| Python | Backend Programming Language |
+| Django | Web Framework |
+| HTML/CSS | Frontend Structure & Styling |
+| Bootstrap | Responsive UI |
+| SQLite | Database |
+| Razorpay | Payment Gateway |
+| Django Authentication | User Authentication System |
 
+---
+
+# 📂 Project Structure
+
+```bash
 bookstore/
 │
-├── shop/ Main Django application
-│ ├── migrations/
-│ ├── models.py
-│ ├── views.py
-│ ├── urls.py
-│ └── admin.py
+├── bookstore/                 # Main Project Configuration
+│   ├── settings.py
+│   ├── urls.py
+│   ├── asgi.py
+│   └── wsgi.py
 │
-├── templates/ HTML templates
+├── shop/                      # Main Application
+│   ├── migrations/
+│   ├── templates/
+│   ├── static/
+│   ├── models.py
+│   ├── views.py
+│   ├── urls.py
+│   └── admin.py
 │
-├── static/ Static files (CSS, JS, images)
+├── static/                    # Global Static Files
 │
-├── bookstore/ Project configuration
-│ ├── settings.py
-│ ├── urls.py
-│ ├── asgi.py
-│ └── wsgi.py
+├── templates/                 # HTML Templates
 │
-├── db.sqlite3 SQLite database
-├── manage.py Django management script
-└── requirements.txt Project dependencies
-
+├── db.sqlite3                 # SQLite Database
+├── manage.py                  # Django Management Script
+├── requirements.txt           # Project Dependencies
+└── README.md                  # Project Documentation
+```
 
 ---
 
-## Installation
+# ⚙️ Installation Guide
 
-### Clone the repository
+## 1️⃣ Clone Repository
 
-
-git clone https://github.com/Harshali-14/Readio-Book-Store
+```bash
+git clone https://github.com/Harshali-14/Readio-Book-Store.git
 
 cd bookstore
-
+```
 
 ---
 
-### Create virtual environment
+## 2️⃣ Create Virtual Environment
 
-
+```bash
 python -m venv venv
+```
 
+### Activate Virtual Environment
 
-Activate:
+### Windows
 
-**Windows**
-
+```bash
 venv\Scripts\activate
+```
 
+### Mac/Linux
 
-**Mac/Linux**
-
+```bash
 source venv/bin/activate
-
+```
 
 ---
 
-### Install dependencies
+## 3️⃣ Install Dependencies
 
-
+```bash
 pip install -r requirements.txt
-
+```
 
 ---
 
-### Configure environment variables
+# 🔐 Environment Variables
 
-Create `.env` file:
+Create a `.env` file in the root directory and add:
 
-
+```env
 SECRET_KEY=your_secret_key
 DEBUG=True
+
 RAZORPAY_KEY_ID=your_key_id
 RAZORPAY_KEY_SECRET=your_key_secret
-
+```
 
 ---
 
-### Run migrations
+# 🗃️ Apply Database Migrations
 
-
+```bash
 python manage.py makemigrations
+
 python manage.py migrate
-
+```
 
 ---
 
-### Create superuser
+# 👤 Create Superuser
 
-
+```bash
 python manage.py createsuperuser
-
+```
 
 ---
 
-### Run server
+# ▶️ Run Development Server
 
-
+```bash
 python manage.py runserver
-
+```
 
 Open in browser:
 
+```bash
 http://127.0.0.1:8000/
-
-
----
-
-## Razorpay Integration
-
-- Razorpay is used as the payment gateway  
-- Payments are securely processed from backend  
-- Payment verification is implemented using Razorpay signature  
+```
 
 ---
 
-## Security
+# 💳 Razorpay Integration
 
-- Sensitive data stored in environment variables  
-- CSRF protection enabled  
-- Secure authentication system  
-- Payment verification implemented  
-
----
-
-## Future Improvements
-
-- Advanced search and filtering  
-- Recommendation system  
-- Allow users to add books
+- Secure online payment system
+- Razorpay checkout integration
+- Backend payment verification
+- Signature verification implemented
+- Order payment status management
 
 ---
 
-## Author
+# 🔒 Security Features
 
-Harshali Kulkarni  
+- CSRF Protection Enabled
+- Secure Authentication System
+- Environment Variable Protection
+- Secure Payment Verification
+- Django Built-in Security Features
+
+---
+
+# 📸 Screenshots
+
+## 🏠 Homepage
+![Homepage](static/screenshots/bookstore.png)
+
+## 🔐 Login Page
+![Login](static/screenshots/login.png)
+
+## 📝 Register Page
+![Register](static/screenshots/register.png)
+
+## 🛒 Cart Page
+![Cart](static/screenshots/cart.png)
+
+## 💳 Checkout Page
+![Checkout](static/screenshots/checkout.png)
+
+## 💰 Razorpay Payment
+![Razorpay](static/screenshots/razorpay.png)
+
+## ⏳ Payment Processing
+![Processing](static/screenshots/payment_processing.png)
+
+## ✅ Payment Success
+![Success](static/screenshots/payment_success.png)
+
+## 📦 Order Tracking
+![Tracking](static/screenshots/order_tracking.png)
+
+## 📚 Orders
+![Orders](static/screenshots/orders.png)
+
+## 👤 User Profile
+![Profile](static/screenshots/profile.png)
+
+## ❤️ Wishlist
+![Wishlist](static/screenshots/wishlist.png)
+
+---
+
+# 🌟 Future Improvements
+
+- Advanced Search & Filters
+- Book Recommendation System
+- Multiple Payment Methods
+- User Reviews & Ratings
+- Email Notifications
+- Admin Analytics Dashboard
+
+---
+
+# 👩‍💻 Author
+
+**Harshali Kulkarni**  
 MCA Student  
+Django & Python Developer
 
 ---
 
+# 📄 License
+
+This project is developed for educational purposes.
