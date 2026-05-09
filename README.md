@@ -1,69 +1,106 @@
 # 📚 Readio — Online Bookstore
 
-Readio is a web-based online bookstore application developed using Django.  
-It provides a complete e-commerce platform where users can browse books, manage carts, place orders, and make secure online payments using Razorpay.
+Readio is a modern web-based online bookstore application developed using Django.  
+The platform allows users to browse books, manage carts, maintain wishlists, place orders, and make secure online payments using Razorpay.
+
+The project also includes REST API support tested using Thunder Client for backend communication and future mobile/web integration.
 
 ---
 
 # 🚀 Features
 
-- User Registration & Login
+## 👤 User Authentication
+- User Registration
+- User Login & Logout
 - Secure Authentication System
+- User Profile Management
+
+## 📚 Book Management
 - Browse Available Books
-- Book Detail Pages
-- Add to Cart / Remove from Cart
-- Cart Total Calculation
+- View Detailed Book Information
+- Book Categories & Listings
+
+## 🛒 Cart & Wishlist
+- Add Books to Cart
+- Remove Books from Cart
+- Wishlist Functionality
+- Automatic Cart Total Calculation
+
+## 💳 Payment System
 - Razorpay Payment Gateway Integration
 - Secure Payment Verification
-- Order History Management
-- Wishlist Feature
-- Responsive UI Design
-- Admin Panel for Management
+- Checkout System
+- Payment Success & Failure Handling
+
+## 📦 Order Management
+- Place Orders
+- Order Tracking
+- Order History
+
+## 🔌 REST API Support
+- REST API Integration using Django REST Framework
+- JSON-based API Responses
+- Backend API Communication
+- API Testing using Thunder Client
+
+## 🎨 User Interface
+- Responsive Design
+- Modern UI using Bootstrap
+- Mobile Friendly Layout
 
 ---
 
 # 🛠️ Technology Stack
 
-| Technology | Description |
-|------------|-------------|
-| Python | Backend Programming Language |
+| Technology | Purpose |
+|------------|----------|
+| Python | Backend Programming |
 | Django | Web Framework |
-| HTML/CSS | Frontend Structure & Styling |
+| Django REST Framework | REST API Development |
+| HTML5 | Frontend Structure |
+| CSS3 | Styling |
 | Bootstrap | Responsive UI |
+| JavaScript | Client-side Functionality |
 | SQLite | Database |
 | Razorpay | Payment Gateway |
-| Django Authentication | User Authentication System |
+| Thunder Client | API Testing |
 
 ---
 
 # 📂 Project Structure
 
 ```bash
-bookstore/
+Readio-Book-Store/
 │
-├── bookstore/                 # Main Project Configuration
+├── bookstore/                     # Main Django Project
 │   ├── settings.py
 │   ├── urls.py
 │   ├── asgi.py
 │   └── wsgi.py
 │
-├── shop/                      # Main Application
+├── shop/                          # Main Django Application
 │   ├── migrations/
 │   ├── templates/
 │   ├── static/
 │   ├── models.py
 │   ├── views.py
+│   ├── serializers.py
+│   ├── api_views.py
 │   ├── urls.py
 │   └── admin.py
 │
-├── static/                    # Global Static Files
+├── templates/                     # HTML Templates
 │
-├── templates/                 # HTML Templates
+├── static/                        # CSS, JS, Images
 │
-├── db.sqlite3                 # SQLite Database
-├── manage.py                  # Django Management Script
-├── requirements.txt           # Project Dependencies
-└── README.md                  # Project Documentation
+├── media/                         # Uploaded Media Files
+│
+├── db.sqlite3                     # SQLite Database
+├── manage.py                      # Django Management Script
+├── requirements.txt               # Project Dependencies
+├── .env                           # Environment Variables
+├── .gitignore                     # Git Ignore File
+└── README.md                      # Project Documentation
 ```
 
 ---
@@ -75,7 +112,7 @@ bookstore/
 ```bash
 git clone https://github.com/Harshali-14/Readio-Book-Store.git
 
-cd bookstore
+cd Readio-Book-Store
 ```
 
 ---
@@ -110,16 +147,18 @@ pip install -r requirements.txt
 
 ---
 
-# 🔐 Environment Variables
+# 🔐 Configure Environment Variables
 
-Create a `.env` file in the root directory and add:
+Create a `.env` file in the root directory.
 
 ```env
 SECRET_KEY=your_secret_key
+
 DEBUG=True
 
-RAZORPAY_KEY_ID=your_key_id
-RAZORPAY_KEY_SECRET=your_key_secret
+RAZORPAY_KEY_ID=your_razorpay_key_id
+
+RAZORPAY_KEY_SECRET=your_razorpay_secret_key
 ```
 
 ---
@@ -148,7 +187,7 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-Open in browser:
+Open Browser:
 
 ```bash
 http://127.0.0.1:8000/
@@ -156,13 +195,37 @@ http://127.0.0.1:8000/
 
 ---
 
-# 💳 Razorpay Integration
+# 🔌 REST API Endpoints
 
-- Secure online payment system
-- Razorpay checkout integration
-- Backend payment verification
-- Signature verification implemented
-- Order payment status management
+## Sample API URLs
+
+```bash
+/api/books/
+/api/cart/
+/api/orders/
+/api/payment/
+```
+
+## API Features
+- JSON Response Handling
+- REST Architecture
+- Backend Data Communication
+- Future Mobile App Support
+
+## API Testing
+REST APIs were tested using Thunder Client in Visual Studio Code.
+
+---
+
+# 💳 Razorpay Payment Integration
+
+Readio uses Razorpay for secure online payment processing.
+
+## Payment Features
+- Secure Checkout
+- Payment Verification using Razorpay Signature
+- Online Payment Management
+- Payment Status Handling
 
 ---
 
@@ -170,7 +233,7 @@ http://127.0.0.1:8000/
 
 - CSRF Protection Enabled
 - Secure Authentication System
-- Environment Variable Protection
+- Environment Variables for Sensitive Data
 - Secure Payment Verification
 - Django Built-in Security Features
 
@@ -193,7 +256,7 @@ http://127.0.0.1:8000/
 ## 💳 Checkout Page
 ![Checkout](static/screenshots/checkout.png)
 
-## 💰 Razorpay Payment
+## 💰 Razorpay Integration
 ![Razorpay](static/screenshots/razorpay.png)
 
 ## ⏳ Payment Processing
@@ -205,36 +268,45 @@ http://127.0.0.1:8000/
 ## 📦 Order Tracking
 ![Tracking](static/screenshots/order_tracking.png)
 
-## 📚 Orders
+## 📚 Orders Page
 ![Orders](static/screenshots/orders.png)
 
-## 👤 User Profile
+## 👤 Profile Page
 ![Profile](static/screenshots/profile.png)
 
-## ❤️ Wishlist
+## ❤️ Wishlist Page
 ![Wishlist](static/screenshots/wishlist.png)
 
 ---
 
 # 🌟 Future Improvements
 
-- Advanced Search & Filters
-- Book Recommendation System
-- Multiple Payment Methods
-- User Reviews & Ratings
+- Advanced Search & Filtering
 - Email Notifications
+- Multiple Payment Methods
 - Admin Analytics Dashboard
+- Mobile Application Support
+
+---
+
+# 📄 requirements.txt
+
+Generate automatically using:
+
+```bash
+pip freeze > requirements.txt
+```
 
 ---
 
 # 👩‍💻 Author
 
-**Harshali Kulkarni**  
+## Harshali Kulkarni
 MCA Student  
-Django & Python Developer
+Python & Django Developer
 
 ---
 
-# 📄 License
+# 📜 License
 
-This project is developed for educational purposes.
+This project is developed for educational and learning purposes.
