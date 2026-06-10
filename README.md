@@ -309,15 +309,7 @@ Readio uses Razorpay for secure online payment processing.
 
 ---
 
-# requirements.txt
 
-Generate automatically using:
-
-```bash
-pip freeze > requirements.txt
-```
-
----
 
 # Author
 
