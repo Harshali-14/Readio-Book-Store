@@ -67,6 +67,7 @@ urlpatterns = [
 
     # 👉 DRF APIs
     path('api/', include('api.urls')),
+    
 
     # 👉 DRF login UI
     path('api-auth/', include('rest_framework.urls')),
