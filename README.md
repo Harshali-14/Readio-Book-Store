@@ -115,7 +115,7 @@ Readio-Book-Store/
 ## 1. Clone Repository
 
 ```bash
-git clone https://github.com/Harshali-14/Readio-Book-Store.git
+git clone https://github.com/Harshali-14/Readio-Django-Online-Book-Store.git
 
 cd bookstore
 ```
