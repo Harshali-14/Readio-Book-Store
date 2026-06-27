@@ -1,10 +1,25 @@
-# Readio — Online Bookstore
+# Readio — Django Online Book Store
 
-Readio is a modern web-based online bookstore application developed using Django.
+<div align="center">
 
-The platform allows users to browse books, manage carts, maintain wishlists, place orders, and make secure online payments using Razorpay.
+![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge\&logo=python)
+![Django](https://img.shields.io/badge/Django-5.x-darkgreen?style=for-the-badge\&logo=django)
+![Django REST Framework](https://img.shields.io/badge/Django_REST_Framework-API-red?style=for-the-badge)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5-purple?style=for-the-badge\&logo=bootstrap)
+![SQLite](https://img.shields.io/badge/SQLite-Database-blue?style=for-the-badge\&logo=sqlite)
+![Razorpay](https://img.shields.io/badge/Razorpay-Payment-0C6CF2?style=for-the-badge)
 
-The project also includes REST API support tested using Thunder Client for backend communication and future mobile/web integration.
+A modern Online Book Store developed using Django with authentication, shopping cart, wishlist, order management, Razorpay payment integration, and REST APIs.
+
+</div>
+
+---
+
+# Overview
+
+Readio is a full-stack Online Book Store built with Django. It allows users to browse books, add books to their shopping cart or wishlist, place orders, and complete secure online payments through Razorpay.
+
+The project also includes REST APIs developed using Django REST Framework for backend communication and future frontend/mobile application integration.
 
 ---
 
@@ -13,48 +28,58 @@ The project also includes REST API support tested using Thunder Client for backe
 ## User Authentication
 
 * User Registration
-* User Login & Logout
-* Secure Authentication System
+* User Login
+* User Logout
+* Secure Password Authentication
 * User Profile Management
 
 ## Book Management
 
-* Browse Available Books
-* View Detailed Book Information
-* Book Categories & Listings
+* Browse Books
+* View Book Details
+* Category-wise Listing
+* Responsive Book Catalog
 
-## Cart & Wishlist
+## Shopping Cart
 
 * Add Books to Cart
-* Remove Books from Cart
-* Wishlist Functionality
-* Automatic Cart Total Calculation
+* Update Quantity
+* Remove Books
+* Automatic Total Calculation
 
-## Payment System
+## Wishlist
 
-* Razorpay Payment Gateway Integration
+* Add Books to Wishlist
+* Remove Wishlist Items
+* Move Wishlist Items to Cart
+
+## Payment
+
+* Razorpay Payment Gateway
 * Secure Payment Verification
-* Checkout System
+* Checkout Process
 * Payment Success & Failure Handling
 
-## Order Management
+## Orders
 
 * Place Orders
-* Order Tracking
-* Order History
+* View Order History
+* Track Orders
+* Payment Status
 
-## REST API Support
+## REST API
 
-* REST API Integration using Django REST Framework
-* JSON-based API Responses
-* Backend API Communication
-* API Testing using Thunder Client
+* Django REST Framework
+* JSON Responses
+* CRUD Operations
+* Thunder Client Tested
 
 ## User Interface
 
-* Responsive Design
-* Modern UI using Bootstrap
-* Mobile-Friendly Layout
+* Bootstrap 5
+* Mobile Responsive
+* Clean Navigation
+* User-Friendly Design
 
 ---
 
@@ -62,12 +87,12 @@ The project also includes REST API support tested using Thunder Client for backe
 
 | Technology            | Purpose                   |
 | --------------------- | ------------------------- |
-| Python                | Backend Programming       |
+| Python                | Backend                   |
 | Django                | Web Framework             |
-| Django REST Framework | REST API Development      |
-| HTML5                 | Frontend Structure        |
+| Django REST Framework | REST API                  |
+| HTML5                 | Frontend                  |
 | CSS3                  | Styling                   |
-| Bootstrap             | Responsive UI             |
+| Bootstrap 5           | Responsive Design         |
 | JavaScript            | Client-side Functionality |
 | SQLite                | Database                  |
 | Razorpay              | Payment Gateway           |
@@ -77,8 +102,8 @@ The project also includes REST API support tested using Thunder Client for backe
 
 # Project Structure
 
-```bash
-Readio-Book-Store/
+```text
+Readio-Django-Online-Book-Store/
 │
 ├── bookstore/
 │   ├── settings.py
@@ -95,10 +120,12 @@ Readio-Book-Store/
 │   ├── serializers.py
 │   ├── api_views.py
 │   ├── urls.py
+│   ├── forms.py
 │   └── admin.py
 │
 ├── templates/
 ├── static/
+│   └── screenshots/
 ├── media/
 ├── db.sqlite3
 ├── manage.py
@@ -110,19 +137,19 @@ Readio-Book-Store/
 
 ---
 
-# Installation Guide
+# Installation
 
-## 1. Clone Repository
+## Clone Repository
 
 ```bash
 git clone https://github.com/Harshali-14/Readio-Django-Online-Book-Store.git
 
-cd bookstore
+cd Readio-Django-Online-Book-Store
 ```
 
 ---
 
-## 2. Create Virtual Environment
+## Create Virtual Environment
 
 ```bash
 python -m venv venv
@@ -130,13 +157,13 @@ python -m venv venv
 
 ### Activate Virtual Environment
 
-**Windows**
+Windows
 
 ```bash
 venv\Scripts\activate
 ```
 
-**Mac/Linux**
+Linux/macOS
 
 ```bash
 source venv/bin/activate
@@ -144,7 +171,7 @@ source venv/bin/activate
 
 ---
 
-## 3. Install Dependencies
+## Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -152,23 +179,25 @@ pip install -r requirements.txt
 
 ---
 
-# Configure Environment Variables
+# Environment Variables
 
-Create a `.env` file in the root directory.
+Create a `.env` file in the project root.
 
 ```env
 SECRET_KEY=your_secret_key
 
 DEBUG=True
 
-RAZORPAY_KEY_ID=your_razorpay_key_id
+RAZORPAY_KEY_ID=your_key_id
 
-RAZORPAY_KEY_SECRET=your_razorpay_secret_key
+RAZORPAY_KEY_SECRET=your_key_secret
 ```
 
 ---
 
-# Apply Database Migrations
+# Database Setup
+
+Run migrations.
 
 ```bash
 python manage.py makemigrations
@@ -186,64 +215,77 @@ python manage.py createsuperuser
 
 ---
 
-# Run Development Server
+# Run the Project
 
 ```bash
 python manage.py runserver
 ```
 
-Open Browser:
+Open your browser:
 
-```bash
+```
 http://127.0.0.1:8000/
 ```
 
 ---
 
-# REST API Endpoints
+# REST API
 
-## Sample API URLs
+## Available Endpoints
 
-```bash
-/api/books/
-/api/cart/
-/api/orders/
-/api/payment/
+| Method | Endpoint        | Description      |
+| ------ | --------------- | ---------------- |
+| GET    | `/api/books/`   | List Books       |
+| GET    | `/api/cart/`    | View Cart        |
+| GET    | `/api/orders/`  | Order History    |
+| POST   | `/api/payment/` | Razorpay Payment |
+
+### API Features
+
+* JSON Response
+* REST Architecture
+* CRUD Operations
+* Thunder Client Tested
+* Mobile App Ready
+
+---
+
+# Payment Integration
+
+Readio integrates Razorpay to provide secure online payment processing.
+
+### Payment Flow
+
+```
+Browse Books
+      │
+      ▼
+Add to Cart
+      │
+      ▼
+Checkout
+      │
+      ▼
+Razorpay Payment
+      │
+      ▼
+Payment Verification
+      │
+      ▼
+Order Confirmation
 ```
 
-## API Features
-
-* JSON Response Handling
-* REST Architecture
-* Backend Data Communication
-* Future Mobile App Support
-
-## API Testing
-
-REST APIs were tested using Thunder Client in Visual Studio Code.
-
 ---
 
-# Razorpay Payment Integration
+# Security
 
-Readio uses Razorpay for secure online payment processing.
-
-## Payment Features
-
-* Secure Checkout
-* Payment Verification using Razorpay Signature
-* Online Payment Management
-* Payment Status Handling
-
----
-
-# Security Features
-
-* CSRF Protection Enabled
-* Secure Authentication System
-* Environment Variables for Sensitive Data
-* Secure Payment Verification
-* Django Built-in Security Features
+* Django Authentication
+* Password Hashing
+* CSRF Protection
+* Session Management
+* Environment Variables
+* Razorpay Signature Verification
+* Django Built-in Security Middleware
 
 ---
 
@@ -251,74 +293,163 @@ Readio uses Razorpay for secure online payment processing.
 
 ## Homepage
 
-![Homepage](static/screenshots/bookstore.png)
+<img src="static/screenshots/bookstore.png" width="900">
 
-## Login Page
+---
 
-![Login](static/screenshots/login.png)
+## Login
 
-## Register Page
+<img src="static/screenshots/login.png" width="900">
 
-![Register](static/screenshots/register.png)
+---
 
-## Cart Page
+## Register
 
-![Cart](static/screenshots/cart.png)
+<img src="static/screenshots/register.png" width="900">
 
-## Checkout Page
+---
 
-![Checkout](static/screenshots/checkout.png)
+## Book Details
 
-## Razorpay Integration
+<img src="static/screenshots/book_details.png" width="900">
 
-![Razorpay](static/screenshots/razorpay.png)
+---
+
+## Shopping Cart
+
+<img src="static/screenshots/cart.png" width="900">
+
+---
+
+## Wishlist
+
+<img src="static/screenshots/wishlist.png" width="900">
+
+---
+
+## Checkout
+
+<img src="static/screenshots/checkout.png" width="900">
+
+---
+
+## Razorpay Payment
+
+<img src="static/screenshots/razorpay.png" width="900">
+
+---
 
 ## Payment Processing
 
-![Processing](static/screenshots/payment_processing.png)
+<img src="static/screenshots/payment_processing.png" width="900">
+
+---
 
 ## Payment Success
 
-![Success](static/screenshots/payment_success.png)
+<img src="static/screenshots/payment_success.png" width="900">
+
+---
+
+## Orders
+
+<img src="static/screenshots/orders.png" width="900">
+
+---
 
 ## Order Tracking
 
-![Tracking](static/screenshots/order_tracking.png)
+<img src="static/screenshots/order_tracking.png" width="900">
 
-## Orders Page
+---
 
-![Orders](static/screenshots/orders.png)
+## User Profile
 
-## Profile Page
-
-![Profile](static/screenshots/profile.png)
-
-## Wishlist Page
-
-![Wishlist](static/screenshots/wishlist.png)
+<img src="static/screenshots/profile.png" width="900">
 
 ---
 
 # Future Improvements
 
-* Advanced Search & Filtering
+* Advanced Search
+* Book Reviews & Ratings
 * Email Notifications
-* Multiple Payment Methods
+* Coupon & Discount System
+* Inventory Management
 * Admin Analytics Dashboard
-* Mobile Application Support
+* Multiple Payment Methods
+* PostgreSQL Support
+* Docker Deployment
+* Cloud Deployment
+* Mobile Application
 
 ---
 
+# Contributing
 
+Contributions are welcome.
+
+1. Fork the repository.
+
+2. Create a new branch.
+
+```bash
+git checkout -b feature-name
+```
+
+3. Commit your changes.
+
+```bash
+git commit -m "Add new feature"
+```
+
+4. Push the branch.
+
+```bash
+git push origin feature-name
+```
+
+5. Create a Pull Request.
+
+---
+
+# Requirements
+
+```
+Python 3.10+
+
+Django
+
+Django REST Framework
+
+Bootstrap 5
+
+SQLite
+
+Razorpay
+
+python-dotenv
+```
+
+---
 
 # Author
 
 **Harshali Kulkarni**
+
 MCA Student
+
 Python & Django Developer
+
+GitHub: https://github.com/Harshali-14
+
 
 ---
 
 # License
 
 This project is developed for educational and learning purposes.
+
+---
+
+If you found this project useful, please consider starring the repository.
